@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 typedef struct
 {
     char cin[20];
@@ -13,7 +14,7 @@ void AjouterCompte(Compte C[],int *p);
 
 
 
- static int i,j=0,choix;
+ static int i,j=0,choix,ech;
  static Compte C[100];
 int main()
 {
@@ -26,6 +27,9 @@ int main()
 
     do
     {
+
+        menu:
+             system("cls");
         printf("\t\t\t:::::::::::::::::::::::::: Menu Principale ::::::::::::::::::::::::::\n\n\n");
         printf("\t\t\t 1- Introduire un compte bancaire \n");
         printf("\t\t\t 2- Introduire plusieurs comptes bancaires \n");
@@ -84,6 +88,7 @@ int main()
 
                 do
                 {
+                     system("cls");
                    printf("\t\t\t:::::::::::::::::::::::::: Operations ::::::::::::::::::::::::::\n\n\n");
                    printf("\t\t\t 1- Retrait \n");
                    printf("\t\t\t 2- Depot\n");
@@ -117,7 +122,7 @@ int main()
                     }break;
                case 2:
                     {
-                           float s2;
+                        float s2;
 
 
                          printf("entre votre Cin :\t");
@@ -133,6 +138,12 @@ int main()
                         }
 
                     }break;
+               case 3:
+                   {
+                       goto menu;
+
+                   }break;
+
 
 
                 }
@@ -141,9 +152,141 @@ int main()
 
         case 4:
             {
-                system("cls");
 
-               Afficher(C,p,i);
+
+               do{
+
+                   printf("\n\t\t\t:::::::::::::::::::::::::: Affichage ::::::::::::::::::::::::::\n");
+                   printf("\t\t\t 1- Par Ordre Ascendant \n");
+                   printf("\t\t\t 2- Par Ordre Descendant\n");
+                   printf("\t\t\t 3- Par Ordre Ascendant (les comptes bancaires ayant un montant superieur a un chiffre introduit)\n");
+                   printf("\t\t\t 4- Par Ordre Descendant (les comptes bancaires ayant un montant superieur a un chiffre introduit)\n");
+                   printf("\t\t\t 5- Recherche Par Cin\n");
+                   printf("\t\t\t 6- retour a menu\n");
+                   printf("\t Veuillez choisir une operation: \t");
+                   scanf("%d",&choix);
+                   switch(choix)
+                   {
+                   case 1:
+                    {
+                       int a=j;
+
+
+                        Compte tmp;
+                        ech=0;
+                        do
+                        {
+                             for(i=0;i<a-1;i++)
+                        {
+                            if(C[i].montant>C[i+1].montant)
+                            {
+                                tmp=C[i+1];
+                                C[i+1]=C[i];
+                                C[i]= tmp;
+
+                            }
+                             ech++;
+
+
+
+                        }
+
+                        }while(ech>0);
+
+                               printf("\n\t\t\t:::::::::::::::::::::::::: L'ffichage Par Ordre Ascendant ::::::::::::::::::::::::::\n");
+
+                        for(i=0;i<a;i++)
+                        {
+                          printf(" Cin : %s  ,\tNom: %s  ,\t Prenom: %s  ,\t Montant : %.2f\n\n",C[i].cin,C[i].nom,C[i].prenom,C[i].montant);
+
+                        }
+
+
+
+
+
+
+                    }break;
+                  case 2:
+                    {
+                            int a=j;
+
+
+                        Compte tmp;
+                        ech=0;
+                        do
+                        {
+                             for(i=0;i<a-1;i++)
+                        {
+                            if(C[i].montant<C[i+1].montant)
+                            {
+                                tmp=C[i+1];
+                                C[i+1]=C[i];
+                                C[i]= tmp;
+
+                            }
+                             ech++;
+
+
+
+                        }
+
+                        }while(ech>0);
+                        system("cls");
+                               printf("\n\t\t\t:::::::::::::::::::::::::: L'ffichage Par Ordre Descendant  ::::::::::::::::::::::::::\n");
+
+                        for(i=0;i<a;i++)
+                        {
+                            printf(" Cin : %s  ,\tNom: %s  ,\t Prenom: %s  ,\t Montant : %.2f\n\n",C[i].cin,C[i].nom,C[i].prenom,C[i].montant);
+                        }
+
+
+                    }break;
+                  case 3:
+                    {
+                        int a=j;
+                        float x_montant;
+                        printf("\n Veuillez entre un Montant: \t");
+                        scanf("%f",&x_montant);
+                        Compte new_c[100];
+                        for(i=0;i<a;i++)
+                        {
+                            if(C[i].montant>x_montant)
+                            {
+                                new_c[i]=C[i];
+                            }
+                        }
+
+
+
+
+
+
+
+
+
+
+
+
+                    }break;
+                  case 4:
+                    {
+
+                    }break;
+                  case 5:
+                    {
+
+                    }break;
+                  case 6:
+                    {
+                        goto menu;
+
+                    }break;
+
+                   }
+
+
+               }while(choix!=6);
 
 
 
@@ -205,3 +348,5 @@ void Afficher(Compte C[100],int *p,int i)
     }
 
 }
+
+
