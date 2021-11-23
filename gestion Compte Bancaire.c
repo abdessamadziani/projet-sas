@@ -10,23 +10,35 @@ typedef struct
 
 }Compte;
 void AjouterCompte();
+void AjouterComptes();
+void Fidelisation();
+void Chercher();
+void Retrait();
+void Depot();
+void Affichage_Ascendant();
+void Affichage_Descendant();
 
 
 
- static int i,j=0,choix,ech,nben;
+
+
+ static int i,j=0,choix,ech,nben,a;
  static Compte C[100];
-int main()
+
+
+ int main()
 {
 
     int nben=0;
-    char cin_user[20] ;
+
 
 
     do
     {
 
         menu:
-             //system("cls");
+
+       //system("cls");
         printf("\t\t\t:::::::::::::::::::::::::: Menu Principale ::::::::::::::::::::::::::\n\n\n");
         printf("\t\t\t 1- Introduire un compte bancaire \n");
         printf("\t\t\t 2- Introduire plusieurs comptes bancaires \n");
@@ -34,6 +46,7 @@ int main()
         printf("\t\t\t 4- Affichage \n");
         printf("\t\t\t 5- Fidelisation \n");
         printf("\t\t\t 6- Quitter L'\application\n\n");
+
         do
         {
             printf("\tVeuillez donner Votre choix : \t");
@@ -46,38 +59,15 @@ int main()
         {
         case 1:
             {
-                AjouterCompte(C,j);
+                AjouterCompte();
 
 
 
             }break;
         case 2:
             {
-                do
-                {
-                      printf("donner le nombre d'enregistrement: \t");
-                      scanf("%d",&nben);
-                      if(nben<1 || nben>100)
-                        printf("le nombre d'enregistrement doit etre comprit entre 1 et 100\n");
-                }while(nben<1 || nben>100);
-                int a=j;
-    for(i=a;i<nben+a;i++)
-    {
-
-          printf("Veuillez donner les informations de compte bancaire numero %d :\n",i+1);
-          printf("Veuillez Entrer le CIN : \t");
-          scanf("%s",C[i].cin);
-          printf("Veuillez Entrer le Nom : \t");
-          scanf("%s",C[i].nom);
-          printf("Veuillez Entrer le Prenom : \t");
-          scanf("%s",C[i].prenom);
-          printf("Veuillez Entrer le Montant : ");
-          scanf("%f",&C[i].montant);
-     printf("\n");
-     j++;
-
-    }
-    }break;
+            AjouterComptes();
+            }break;
 
         case 3:
             {
@@ -85,7 +75,7 @@ int main()
 
                 do
                 {
-                     system("cls");
+                     //system("cls");
                    printf("\t\t\t:::::::::::::::::::::::::: Operations ::::::::::::::::::::::::::\n\n\n");
                    printf("\t\t\t 1- Retrait \n");
                    printf("\t\t\t 2- Depot\n");
@@ -96,54 +86,18 @@ int main()
                 {
                 case 1:
                     {
-                        float s1;
-
-                        printf("entre votre Cin :\t");
-                        scanf("%s",cin_user);
-                        for(i=0;i<nben;i++)
-                        {
-                            if(strstr(cin_user,C[i].cin))
-                            {
-                                printf("combien :\n");
-                                scanf("%f",&s1);
-                                if(s1>C[i].montant)
-                                {
-                                    printf("\n impossible votre sold inferieur a %.2f\n",s1);
-                                    break;
-                                }
-                                C[i].montant-=s1;
-                            }
-
-                        }
-
+                        Retrait();
                     }break;
                case 2:
                     {
-                        float s2;
-
-
-                         printf("entre votre Cin :\t");
-                        scanf("%s",cin_user);
-                        for(i=0;i<nben;i++)
-                        {
-                            if(strstr(cin_user,C[i].cin))
-                            {
-                                printf("combien :\n");
-                                scanf("%f",&s2);
-                                C[i].montant+=s2;
-                            }
-                        }
-
+                        Depot();
                     }break;
                case 3:
                    {
                        goto menu;
 
                    }break;
-
-
-
-                }
+                   }
                 }while(choix!=3);
             }
 
@@ -166,78 +120,11 @@ int main()
                    {
                    case 1:
                     {
-                       int a=j;
-
-
-                        Compte tmp;
-                        ech=0;
-                        do
-                        {
-                             for(i=0;i<a-1;i++)
-                        {
-                            if(C[i].montant>C[i+1].montant)
-                            {
-                                tmp=C[i+1];
-                                C[i+1]=C[i];
-                                C[i]= tmp;
-
-                            }
-                             ech++;
-
-
-
-                        }
-
-                        }while(ech>0);
-
-                               printf("\n\t\t\t:::::::::::::::::::::::::: L'ffichage Par Ordre Ascendant ::::::::::::::::::::::::::\n");
-
-                        for(i=0;i<a;i++)
-                        {
-                          printf(" Cin : %s  ,\tNom: %s  ,\t Prenom: %s  ,\t Montant : %.2f DH\n\n",C[i].cin,C[i].nom,C[i].prenom,C[i].montant);
-
-                        }
-
-
-
-
-
-
+                        Affichage_Ascendant();
                     }break;
                   case 2:
                     {
-                            int a=j;
-
-
-                        Compte tmp;
-                        ech=0;
-                        do
-                        {
-                             for(i=0;i<a-1;i++)
-                        {
-                            if(C[i].montant<C[i+1].montant)
-                            {
-                                tmp=C[i+1];
-                                C[i+1]=C[i];
-                                C[i]= tmp;
-
-                            }
-                             ech++;
-
-
-
-                        }
-
-                        }while(ech>0);
-                        system("cls");
-                               printf("\n\t\t\t:::::::::::::::::::::::::: L'ffichage Par Ordre Descendant  ::::::::::::::::::::::::::\n");
-
-                        for(i=0;i<a;i++)
-                        {
-                            printf(" Cin : %s  ,\tNom: %s  ,\t Prenom: %s  ,\t Montant : %.2f DH\n\n",C[i].cin,C[i].nom,C[i].prenom,C[i].montant);
-                        }
-
-
+                        Affichage_Descendant();
                     }break;
                   case 3:
                     {
@@ -281,9 +168,7 @@ int main()
                             }
                              ech++;
 
-
-
-                        }
+                             }
 
                         }while(ech>0);
 
@@ -351,39 +236,15 @@ int main()
                     }break;
                   case 5:
                     {
-                         int a=j;
-                        char x_cin[20];
-                        printf("Veuillez Entrer votre Cin: \t");
-                        scanf("%s",x_cin);
-                        int trouve=0;
-                        for(i=0;i<a;i++)
-                        {
-                            if(strstr(x_cin,C[i].cin))
-                            {
-                                trouve=1;
-                                break;
-
-                            }
-                            else
-                                 trouve=0;
-                        }
-                        if(trouve==1)
-                         printf("existe :\n Cin : %s\t Nom :  %s\t Prenom : %s\t Montant: %.2f DH\n",C[i].cin,C[i].nom,C[i].prenom,C[i].montant);
-                            else
-                                printf("\n CIN n'existe pas \n");
-
-
+                        Chercher();
                     }break;
                   case 6:
-                    {
-                        goto menu;
-
+                    {goto menu;
                     }break;
 
-                   }
+                    }
 
-
-               }while(choix!=6);
+                    }while(choix!=6);
 
 
 
@@ -391,45 +252,7 @@ int main()
             }break;
         case 5:
             {
-                         // fidélisation 1.3%
-
-                             int a=j;
-
-
-                        Compte tmp;
-                        ech=0;
-                        do
-                        {
-                             for(i=0;i<a-1;i++)
-                        {
-                            if(C[i].montant<C[i+1].montant)
-                            {
-                                tmp=C[i+1];
-                                C[i+1]=C[i];
-                                C[i]= tmp;
-
-                            }
-                             ech++;
-
-
-
-                        }
-
-                        }while(ech>0);
-                        system("cls");
-                               printf("\n\t\t\t:::::::::::::::::::::::::: L'ffichage les 3 premier avent la fidelisation  ::::::::::::::::::::::::::\n");
-
-
-
-                        for(i=0;i<3;i++)
-                        {
-                         printf(" Cin : %s  ,\tNom: %s  ,\t Prenom: %s  ,\t Montant : %.2f DH\n\n",C[i].cin,C[i].nom,C[i].prenom,C[i].montant);
-                           C[i].montant+=((C[i].montant*1.3)/100);
-
-                        }
-
-
-
+            Fidelisation();
             }break;
         case 6:
             {
@@ -449,8 +272,6 @@ int main()
 
 void AjouterCompte()
 {
-
-
     printf("\nIntroduire un compte bancaire:\n");
     printf("Veuillez Entrer votre CIN : \t");
     scanf("%s",C[i].cin);
@@ -460,14 +281,177 @@ void AjouterCompte()
     scanf("%s",C[i].prenom);
      printf("Veuillez Entrer votre Montant : ");
     scanf("%f",&C[i].montant);
-//(nben)++;
- i++;
+i++;
 j++;
-    printf("\n");
+}
+void AjouterComptes()
+{
+    do{
+     printf("donner le nombre d'enregistrement: \t");
+     scanf("%d",&nben);
+     if(nben<1 || nben>100)
+     printf("le nombre d'enregistrement doit etre comprit entre 1 et 100\n");
+    }while(nben<1 || nben>100);
+        int a=j;
+    for(i=a;i<nben+a;i++)
+    {
+
+          printf("Veuillez donner les informations de compte bancaire numero %d :\n",i+1);
+          printf("Veuillez Entrer le CIN : \t");
+          scanf("%s",C[i].cin);
+          printf("Veuillez Entrer le Nom : \t");
+          scanf("%s",C[i].nom);
+          printf("Veuillez Entrer le Prenom : \t");
+          scanf("%s",C[i].prenom);
+          printf("Veuillez Entrer le Montant : ");
+          scanf("%f",&C[i].montant);
+     printf("\n");
+     j++;
+
+    }
+}
+
+void Fidelisation()
+{
+int a=j;
+Compte tmp;
+ech=0;
+ do
+  {
+    for(i=0;i<a-1;i++)
+    {
+     if(C[i].montant<C[i+1].montant)
+      {
+        tmp=C[i+1];
+        C[i+1]=C[i];
+        C[i]= tmp;
+
+      }
+    ech++;
+}
+}while(ech>0);
+    system("cls");
+  printf("\n\t\t\t:::::::::::::::::::::::::: L'ffichage les 3 premier avent la fidelisation  ::::::::::::::::::::::::::\n");
+for(i=0;i<3;i++)
+    {
+     printf(" Cin : %s  ,\tNom: %s  ,\t Prenom: %s  ,\t Montant : %.2f DH\n\n",C[i].cin,C[i].nom,C[i].prenom,C[i].montant);
+     C[i].montant+=((C[i].montant*1.3)/100);
+    }
+
+}
+
+void Chercher()
+{
+ int a=j;
+ char x_cin[20];
+ printf("Veuillez Entrer votre Cin: \t");
+ scanf("%s",x_cin);
+ int trouve=0;
+ for(i=0;i<a;i++)
+ {
+    if(strstr(x_cin,C[i].cin))
+        {
+        trouve=1;
+        break;
+        }
+    else
+    trouve=0;
+ }
+ if(trouve==1)
+ printf("existe :\n Cin : %s\t Nom :  %s\t Prenom : %s\t Montant: %.2f DH\n",C[i].cin,C[i].nom,C[i].prenom,C[i].montant);
+ else
+printf("\n CIN n'existe pas \n");
 }
 
 
+void Retrait()
+{
+float s1;
+char cin_user[20];
+printf("entre votre Cin :\t");
+scanf("%s",cin_user);
+for(i=0;i<nben+j;i++)
+    {
+ if(strstr(cin_user,C[i].cin))
+    {
+                    printf("combien :\n");
+                    scanf("%f",&s1);
+                    if(s1>C[i].montant)
+            {
+                system("cls");
+                printf("\n impossible votre sold inferieur a %.2f\n",s1);
+                break;
+            }
+      C[i].montant-=s1;
+    }
+    }
+}
 
+void Depot()
+{
+ float s2;
+ char cin_user[20];
+printf("entre votre Cin :\t");
+scanf("%s",cin_user);
+for(i=0;i<nben+j;i++)
+{
+  if(strstr(cin_user,C[i].cin))
+    {
+        printf("combien :\n");
+        scanf("%f",&s2);
+        C[i].montant+=s2;
+    }
+}
+}
 
+void Affichage_Ascendant()
+{
+a=j;
+Compte tmp;
+ech=0;
+ do
+    {
+for(i=0;i<a-1;i++)
+{
+    if(C[i].montant>C[i+1].montant)
+            {
+        tmp=C[i+1];
+        C[i+1]=C[i];
+        C[i]= tmp;
+            }
+        ech++;
+    }
+    }while(ech>0);
+system("cls");
+printf("\n\t\t\t:::::::::::::::::::::::::: L'ffichage Par Ordre Ascendant ::::::::::::::::::::::::::\n");
+ for(i=0;i<a;i++)
+  {
+    printf(" Cin : %s  ,\tNom: %s  ,\t Prenom: %s  ,\t Montant : %.2f DH\n\n",C[i].cin,C[i].nom,C[i].prenom,C[i].montant);
+  }
+}
 
-
+void Affichage_Descendant()
+{
+int a=j;
+Compte tmp;
+ech=0;
+do
+{
+for(i=0;i<a-1;i++)
+{
+if(C[i].montant<C[i+1].montant)
+{
+tmp=C[i+1];
+C[i+1]=C[i];
+C[i]= tmp;
+}
+ech++;
+}
+}while(ech>0);
+system("cls");
+printf("\n\t\t\t:::::::::::::::::::::::::: L'ffichage Par Ordre Descendant  ::::::::::::::::::::::::::\n");
+for(i=0;i<a;i++)
+{
+    printf(" Cin : %s  ,\tNom: %s  ,\t Prenom: %s  ,\t Montant : %.2f DH\n\n",C[i].cin,C[i].nom,C[i].prenom,C[i].montant);
+}
+}
