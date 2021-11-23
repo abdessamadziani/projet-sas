@@ -197,7 +197,7 @@ int main()
 
                         for(i=0;i<a;i++)
                         {
-                          printf(" Cin : %s  ,\tNom: %s  ,\t Prenom: %s  ,\t Montant : %.2f\n\n",C[i].cin,C[i].nom,C[i].prenom,C[i].montant);
+                          printf(" Cin : %s  ,\tNom: %s  ,\t Prenom: %s  ,\t Montant : %.2f DH\n\n",C[i].cin,C[i].nom,C[i].prenom,C[i].montant);
 
                         }
 
@@ -237,7 +237,7 @@ int main()
 
                         for(i=0;i<a;i++)
                         {
-                            printf(" Cin : %s  ,\tNom: %s  ,\t Prenom: %s  ,\t Montant : %.2f\n\n",C[i].cin,C[i].nom,C[i].prenom,C[i].montant);
+                            printf(" Cin : %s  ,\tNom: %s  ,\t Prenom: %s  ,\t Montant : %.2f DH\n\n",C[i].cin,C[i].nom,C[i].prenom,C[i].montant);
                         }
 
 
@@ -245,6 +245,9 @@ int main()
                   case 3:
                     {
                         int a=j;
+                          printf("%d",a);
+
+                        int x=0;
                         float x_montant;
                         printf("\n Veuillez entre un Montant: \t");
                         scanf("%f",&x_montant);
@@ -253,9 +256,48 @@ int main()
                         {
                             if(C[i].montant>x_montant)
                             {
-                                new_c[i]=C[i];
+                                new_c[x]=C[i];
+                                x++;
+
                             }
                         }
+                        /* just For Testing
+                         for(i=0;i<x;i++)
+                         {
+                        printf(" Cin : %s  ,\tNom: %s  ,\t Prenom: %s  ,\t Montant : %.2f DH\n\n",new_c[i].cin,new_c[i].nom,new_c[i].prenom,new_c[i].montant);
+
+                         }
+                         */
+                         // the same method Tri
+                              Compte tmp;
+                        ech=0;
+                        do
+                        {
+                             for(i=0;i<x-1;i++)
+                        {
+                            if(new_c[i].montant>new_c[i+1].montant)
+                            {
+                                tmp=new_c[i+1];
+                                new_c[i+1]=new_c[i];
+                                new_c[i]= tmp;
+
+                            }
+                             ech++;
+
+
+
+                        }
+
+                        }while(ech>0);
+
+                               printf("\n\t\t\t:::::::::::::::::::::::::: L'ffichage Par Ordre Ascendant par apport le Mantant %.2f ::::::::::::::::::::::::::\n",x_montant);
+
+                        for(i=0;i<x;i++)
+                        {
+                          printf(" Cin : %s  ,\tNom: %s  ,\t Prenom: %s  ,\t Montant : %.2f DH\n\n",new_c[i].cin,new_c[i].nom,new_c[i].prenom,new_c[i].montant);
+
+                        }
+
 
 
 
@@ -272,9 +314,31 @@ int main()
                   case 4:
                     {
 
+
                     }break;
                   case 5:
                     {
+                         int a=j;
+                        char x_cin[20];
+                        printf("Veuillez Entrer votre Cin: \t");
+                        scanf("%s",x_cin);
+                        int trouve=0;
+                        for(i=0;i<a;i++)
+                        {
+                            if(strstr(x_cin,C[i].cin))
+                            {
+                                trouve=1;
+                                break;
+
+                            }
+                            else
+                                 trouve=0;
+                        }
+                        if(trouve==1)
+                         printf("existe :\n Cin : %s\t Nom :  %s\t Prenom : %s\t Montant: %.2f DH\n",C[i].cin,C[i].nom,C[i].prenom,C[i].montant);
+                            else
+                                printf("\n CIN n'existe pas \n");
+
 
                     }break;
                   case 6:
