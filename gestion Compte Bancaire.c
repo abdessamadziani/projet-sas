@@ -9,19 +9,16 @@ typedef struct
     float montant;
 
 }Compte;
-void Afficher(Compte C[100],int *p,int i);
-void AjouterCompte(Compte C[],int *p);
+void AjouterCompte();
 
 
 
- static int i,j=0,choix,ech;
+ static int i,j=0,choix,ech,nben;
  static Compte C[100];
 int main()
 {
 
     int nben=0;
-    int *p;
-    p=&nben;
     char cin_user[20] ;
 
 
@@ -29,7 +26,7 @@ int main()
     {
 
         menu:
-             system("cls");
+             //system("cls");
         printf("\t\t\t:::::::::::::::::::::::::: Menu Principale ::::::::::::::::::::::::::\n\n\n");
         printf("\t\t\t 1- Introduire un compte bancaire \n");
         printf("\t\t\t 2- Introduire plusieurs comptes bancaires \n");
@@ -49,7 +46,7 @@ int main()
         {
         case 1:
             {
-                AjouterCompte(C,p);
+                AjouterCompte(C,j);
 
 
 
@@ -103,7 +100,7 @@ int main()
 
                         printf("entre votre Cin :\t");
                         scanf("%s",cin_user);
-                        for(i=0;i<*p;i++)
+                        for(i=0;i<nben;i++)
                         {
                             if(strstr(cin_user,C[i].cin))
                             {
@@ -127,7 +124,7 @@ int main()
 
                          printf("entre votre Cin :\t");
                         scanf("%s",cin_user);
-                        for(i=0;i<*p;i++)
+                        for(i=0;i<nben;i++)
                         {
                             if(strstr(cin_user,C[i].cin))
                             {
@@ -290,7 +287,56 @@ int main()
 
                         }while(ech>0);
 
-                               printf("\n\t\t\t:::::::::::::::::::::::::: L'ffichage Par Ordre Ascendant par apport le Mantant %.2f ::::::::::::::::::::::::::\n",x_montant);
+                               printf("\n\t\t\t:::::::::::::::::::::::::: L'ffichage Par Ordre Ascendant par apport le Mantant  %.2f d'une manier Ascendant   :::::::::::::::::::::::::\n",x_montant);
+
+                        for(i=0;i<x;i++)
+                        {
+                          printf(" Cin : %s  ,\tNom: %s  ,\t Prenom: %s  ,\t Montant : %.2f DH\n\n",new_c[i].cin,new_c[i].nom,new_c[i].prenom,new_c[i].montant);
+
+                        }
+
+                    }break;
+                  case 4:
+                    {
+                        int a=j;
+                          printf("%d",a);
+
+                        int x=0;
+                        float x_montant;
+                        printf("\n Veuillez entre un Montant: \t");
+                        scanf("%f",&x_montant);
+                        Compte new_c[100];
+                        for(i=0;i<a;i++)
+                        {
+                            if(C[i].montant>x_montant)
+                            {
+                                new_c[x]=C[i];
+                                x++;
+
+                            }
+                        }
+                                Compte tmp;
+                        ech=0;
+                        do
+                        {
+                             for(i=0;i<x-1;i++)
+                        {
+                            if(new_c[i].montant<new_c[i+1].montant)
+                            {
+                                tmp=new_c[i+1];
+                                new_c[i+1]=new_c[i];
+                                new_c[i]= tmp;
+
+                            }
+                             ech++;
+
+
+
+                        }
+
+                        }while(ech>0);
+
+                               printf("\n\t\t\t:::::::::::::::::::::::::: L'ffichage Par Ordre Ascendant par apport le Mantant  %.2f d'une manier Descendant  ::::::::::::::::::::::::::\n",x_montant);
 
                         for(i=0;i<x;i++)
                         {
@@ -300,19 +346,6 @@ int main()
 
 
 
-
-
-
-
-
-
-
-
-
-
-                    }break;
-                  case 4:
-                    {
 
 
                     }break;
@@ -358,6 +391,44 @@ int main()
             }break;
         case 5:
             {
+                         // fidélisation 1.3%
+
+                             int a=j;
+
+
+                        Compte tmp;
+                        ech=0;
+                        do
+                        {
+                             for(i=0;i<a-1;i++)
+                        {
+                            if(C[i].montant<C[i+1].montant)
+                            {
+                                tmp=C[i+1];
+                                C[i+1]=C[i];
+                                C[i]= tmp;
+
+                            }
+                             ech++;
+
+
+
+                        }
+
+                        }while(ech>0);
+                        system("cls");
+                               printf("\n\t\t\t:::::::::::::::::::::::::: L'ffichage les 3 premier avent la fidelisation  ::::::::::::::::::::::::::\n");
+
+
+
+                        for(i=0;i<3;i++)
+                        {
+                         printf(" Cin : %s  ,\tNom: %s  ,\t Prenom: %s  ,\t Montant : %.2f DH\n\n",C[i].cin,C[i].nom,C[i].prenom,C[i].montant);
+                           C[i].montant+=((C[i].montant*1.3)/100);
+
+                        }
+
+
 
             }break;
         case 6:
@@ -376,7 +447,7 @@ int main()
     return 0;
 }
 
-void AjouterCompte(Compte C[100],int *p)
+void AjouterCompte()
 {
 
 
@@ -389,8 +460,8 @@ void AjouterCompte(Compte C[100],int *p)
     scanf("%s",C[i].prenom);
      printf("Veuillez Entrer votre Montant : ");
     scanf("%f",&C[i].montant);
-(*p)++;
-i++;
+//(nben)++;
+ i++;
 j++;
     printf("\n");
 }
@@ -398,19 +469,5 @@ j++;
 
 
 
-
-void Afficher(Compte C[100],int *p,int i)
-{
-    int a=j;
-    for(i=0;i<a;i++)
-    {
-        printf(" votre CIN : %s\n",C[i].cin);
-    printf(" votre nom : %s\n",C[i].nom);
-    printf(" votre prenom : %s\n",C[i].prenom);
-    printf(" votre mantant : %.2f\n",C[i].montant);
-    printf("\n");
-    }
-
-}
 
 
