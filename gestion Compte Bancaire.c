@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <windows.h>
+
+
 
 typedef struct
 {
@@ -40,8 +43,7 @@ void Affichage_Descendant_montant();
     {
 
         menu:
-
-       //system("cls");
+             //system("cls");
         printf("\t\t\t:::::::::::::::::::::::::: Menu Principale ::::::::::::::::::::::::::\n\n\n");
         printf("\t\t\t 1- Introduire un compte bancaire \n");
         printf("\t\t\t 2- Introduire plusieurs comptes bancaires \n");
@@ -96,7 +98,7 @@ void Affichage_Descendant_montant();
                         Depot();
                     }break;
                case 3:
-                   {
+                   {system("cls");
                        goto menu;
 
                    }break;
@@ -144,7 +146,8 @@ void Affichage_Descendant_montant();
                         Chercher();
                     }break;
                   case 6:
-                    {goto menu;
+                    {system("cls");
+                        goto menu;
                     }break;
 
                     }
@@ -158,6 +161,10 @@ void Affichage_Descendant_montant();
         case 5:
             {
             Fidelisation();
+            }break;
+        case 6:
+            {
+            printf("\n\t\t->->->->->->-> Fin de Programme <-<-<-<-<-<-<-<-<-<\n");
             }break;
 
 
@@ -232,7 +239,8 @@ ech=0;
     ech++;
 }
 }while(ech>0);
-    system("cls");
+system("cls");
+
   printf("\n\t\t\t:::::::::::::::::::::::::: L'ffichage les 3 premier avent la fidelisation  ::::::::::::::::::::::::::\n");
 for(i=0;i<3;i++)
     {
@@ -287,11 +295,11 @@ int c=strcmp(cin_user,C[i].cin);
                     if(s1>C[i].montant)
             {
                 system("cls");
-                printf("\n impossible votre sold inferieur a %.2f\n",s1);
+                printf("\n impossible votre sold inferieur a %.2f DH\n",s1);
                 return;
             }
       C[i].montant-=s1;
-      printf("Retrie avec Success\n");
+      printf("Retrait Avec Success\n");
       return;
     }
 
@@ -322,7 +330,7 @@ for(i=0;i<a;i++)
         printf("combien :\n");
         scanf("%f",&s2);
         C[i].montant+=s2;
-        printf("Depot avec Success\n");
+        printf("Depot Avec Success\n");
         return;
     }
 
@@ -354,18 +362,18 @@ for(i=0;i<a-1;i++)
     }
     }while(ech>0);
 system("cls");
-printf("\n\t\t\t:::::::::::::::::::::::::: L'ffichage Par Ordre Ascendant ::::::::::::::::::::::::::\n");
+printf("*************************************************************************************************************\n\n");
+printf("\n\t\t\t:::::::::::::::: L'ffichage Par Ordre Ascendant ::::::::::::::::::\n");
  for(i=0;i<a;i++)
   {
     printf(" Cin : %s  ,\tNom: %s  ,\t Prenom: %s  ,\t Montant : %.2f DH\n\n",C[i].cin,C[i].nom,C[i].prenom,C[i].montant);
   }
+  printf("************************************************************************************************************\n");
+
 }
 
 void Affichage_Descendant()
 {
-
-
-
 int a=j;
 Compte tmp;
 ech=0;
@@ -383,11 +391,14 @@ ech++;
 }
 }while(ech>0);
 system("cls");
-printf("\n\t\t\t:::::::::::::::::::::::::: L'ffichage Par Ordre Descendant  ::::::::::::::::::::::::::\n");
+printf("**************************************************************************************************\n\n");
+printf("\n\t\t\t:::::::::::::::::::::: L'ffichage Par Ordre Descendant  :::::::::::::::::::::\n");
 for(i=0;i<a;i++)
 {
     printf(" Cin : %s  ,\tNom: %s  ,\t Prenom: %s  ,\t Montant : %.2f DH\n\n",C[i].cin,C[i].nom,C[i].prenom,C[i].montant);
 }
+printf("***************************************************************************************************\n\n");
+
 }
 
 
@@ -410,13 +421,7 @@ void Affichage_Ascendant_montant()
 
                             }
                         }
-                        /* just For Testing
-                         for(i=0;i<x;i++)
-                         {
-                        printf(" Cin : %s  ,\tNom: %s  ,\t Prenom: %s  ,\t Montant : %.2f DH\n\n",new_c[i].cin,new_c[i].nom,new_c[i].prenom,new_c[i].montant);
-                         }
-                         */
-                         // the same method Tri
+
                               Compte tmp;
                         ech=0;
                         do
@@ -435,14 +440,18 @@ void Affichage_Ascendant_montant()
                              }
 
                         }while(ech>0);
+                        system("cls");
+                        printf("********************************************************************************************************************************\n");
 
-                               printf("\n\t\t\t:::::::::::::::::::::::::: L'ffichage Par Ordre Ascendant par apport le Mantant  %.2f d'une manier Ascendant   :::::::::::::::::::::::::\n",x_montant);
+                               printf("\n\t\t\t:::::::::::: L'ffichage Par Ordre Ascendant par apport le Mantant  %.2f d'une manier Ascendant ::::::::::::\n\n",x_montant);
 
                         for(i=0;i<x;i++)
                         {
                           printf(" Cin : %s  ,\tNom: %s  ,\t Prenom: %s  ,\t Montant : %.2f DH\n\n",new_c[i].cin,new_c[i].nom,new_c[i].prenom,new_c[i].montant);
 
                         }
+                        printf("*********************************************************************************************************************************\n\n");
+
 }
 
 void Affichage_Descendant_montant()
@@ -484,14 +493,18 @@ void Affichage_Descendant_montant()
                         }
 
                         }while(ech>0);
+                        system("cls");
+                        printf("****************************************************************************************************************************************\n");
 
-                               printf("\n\t\t\t:::::::::::::::::::::::::: L'ffichage Par Ordre Ascendant par apport le Mantant  %.2f d'une manier Descendant  ::::::::::::::::::::::::::\n",x_montant);
+                               printf("\n\t\t\t::::::::::::: L'ffichage Par Ordre Ascendant par apport le Mantant  %.2f d'une manier Descendant :::::::::::::\n\n",x_montant);
 
                         for(i=0;i<x;i++)
                         {
                           printf(" Cin : %s  ,\tNom: %s  ,\t Prenom: %s  ,\t Montant : %.2f DH\n\n",new_c[i].cin,new_c[i].nom,new_c[i].prenom,new_c[i].montant);
 
                         }
+                      printf("*******************************************************************************************************************************************\n\n");
+
 
 
 }
