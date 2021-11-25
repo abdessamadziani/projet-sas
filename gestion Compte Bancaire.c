@@ -2,6 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <windows.h>
+    void color(int couleurDuTexte,int couleurDeFond)
+{
+    HANDLE H=GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(H,couleurDeFond*16+couleurDuTexte);
+}
 
 
 
@@ -28,14 +33,42 @@ void Affichage_Descendant_montant();
 
 
 
- static int i,j=0,choix,ech,nben,a;
+ static int i,j=0,choix,ech,nben=0,a;
  static Compte C[100];
 
 
  int main()
 {
+    Beep(300,500);
+    Beep(500,500);
+    Beep(800,500);
+    Beep(1000,500);
+    Beep(1200,500);
 
-    int nben=0;
+
+       color(0,12);
+    printf("\n\n*************************************************************************************************************************\n\n");
+
+     color(5,0);
+    printf("\t\t*****            *****      ************   ****         ***   ****         ****        \n");
+    printf("\t\t****  **       ** ****     **************   ******        ***   ****         ****        \n");
+    printf("\t\t****   **     **  ****    ***************  *** ***       ***   ****         ****        \n");
+    printf("\t\t****    **   **   ****    *****             ***  ***      ***   ****         ****        \n");
+    printf("\t\t****     ** **    ****    *****             ***   ***     ***   ****         ****        \n");
+    printf("\t\t****      ***     ****    ***************   ***    ***    ***   ****         ****        \n");
+    printf("\t\t****              ****    ***************   ***     ***   ***   ****         ****        \n");
+    printf("\t\t****              ****    ***************  ***      ***  ***   ****         ****        \n");
+    printf("\t\t****              ****    *****            ***       *** ***   ****         ****        \n");
+    printf("\t\t****              ****   *****             ***        ******   ****         ****        \n");
+    printf("\t\t****              ****   **************   ***         *****   ****         ****        \n");
+    printf("\t\t****              ****     **************   ***          ****    ***         ***         \n");
+    printf("\t\t****              ****      ************   ***           ***      ***********           \n");
+  color(0,12);
+    printf("\n*************************************************************************************************************************\n");
+color(1,0);
+
+
+
 
 
 
@@ -44,7 +77,7 @@ void Affichage_Descendant_montant();
 
         menu:
              //system("cls");
-        printf("\t\t\t:::::::::::::::::::::::::: Menu Principale ::::::::::::::::::::::::::\n\n\n");
+        printf("\t\t\t\t\n:::::::::::::::::::::::::: Menu Principale ::::::::::::::::::::::::::\n\n");
         printf("\t\t\t 1- Introduire un compte bancaire \n");
         printf("\t\t\t 2- Introduire plusieurs comptes bancaires \n");
         printf("\t\t\t 3- Operations \n");
@@ -57,7 +90,7 @@ void Affichage_Descendant_montant();
             printf("\tVeuillez donner Votre choix : \t");
             scanf("%d",&choix);
              if(choix>6 || choix<1)
-            printf("Votre Choix doit Etre Compris Entre 1 et 6 \n");
+                printf("Votre Choix doit Etre Compris Entre 1 et 6 \n");
 
         }while(choix>6 || choix<1);
         switch(choix)
@@ -164,7 +197,14 @@ void Affichage_Descendant_montant();
             }break;
         case 6:
             {
-            printf("\n\t\t->->->->->->-> Fin de Programme <-<-<-<-<-<-<-<-<-<\n");
+                Beep(1200,500);
+                Beep(1000,500);
+                Beep(800,500);
+                Beep(500,500);
+                Beep(300,500);
+    printf("\n\t\t->->->->->->-> Fin de Programme <-<-<-<-<-<-<-<-<-<\n");
+            color(7,0);
+
             }break;
 
 
@@ -269,7 +309,7 @@ void Chercher()
  if(trouve==1)
     {
         system("cls");
-    printf("existe :\n Cin : %s\t Nom :  %s\t Prenom : %s\t Montant: %.2f DH\n",C[i].cin,C[i].nom,C[i].prenom,C[i].montant);
+    printf("\nexiste :\n\n Cin : %s\t Nom :  %s\t Prenom : %s\t Montant: %.2f DH\n",C[i].cin,C[i].nom,C[i].prenom,C[i].montant);
     }
  else
 printf("\n CIN n'existe pas \n");
@@ -442,7 +482,6 @@ void Affichage_Ascendant_montant()
                         }while(ech>0);
                         system("cls");
                         printf("********************************************************************************************************************************\n");
-
                                printf("\n\t\t\t:::::::::::: L'ffichage Par Ordre Ascendant par apport le Mantant  %.2f d'une manier Ascendant ::::::::::::\n\n",x_montant);
 
                         for(i=0;i<x;i++)
@@ -495,11 +534,10 @@ void Affichage_Descendant_montant()
                         }while(ech>0);
                         system("cls");
                         printf("****************************************************************************************************************************************\n");
-
                                printf("\n\t\t\t::::::::::::: L'ffichage Par Ordre Ascendant par apport le Mantant  %.2f d'une manier Descendant :::::::::::::\n\n",x_montant);
 
                         for(i=0;i<x;i++)
-                        {
+                         {
                           printf(" Cin : %s  ,\tNom: %s  ,\t Prenom: %s  ,\t Montant : %.2f DH\n\n",new_c[i].cin,new_c[i].nom,new_c[i].prenom,new_c[i].montant);
 
                         }
@@ -508,3 +546,4 @@ void Affichage_Descendant_montant()
 
 
 }
+//last Version
